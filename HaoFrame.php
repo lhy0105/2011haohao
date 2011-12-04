@@ -130,19 +130,19 @@ EOD;
 						call_user_func(array($controller, $_GET['action']));
 					}else{
 						header("HTTP/1.0 404 Not Found"); 
-						throw new HaoFrameException('The MVC Control\'s Function Is Failure!');
+						throw new HaoFrameException('Line:'.__LINE__.' Description:The MVC Control\'s Function Is Failure!');
 					}
 				}else{
 					header("HTTP/1.0 404 Not Found"); 
-					throw new HaoFrameException('The MVC Control\'s Controller Is Failure!');
+					throw new HaoFrameException('Line:'.__LINE__.' Description:The MVC Control\'s Controller Is Failure!');
 				}
 			}else{
 				header("HTTP/1.0 404 Not Found"); 
-				throw new HaoFrameException('The MVC Control\'s '.$file.' Is Failure!');
+				throw new HaoFrameException('Line:'.__LINE__.' Description:The MVC Control\'s '.$file.' Is Failure!');
 			}
 		}else{
 			header("HTTP/1.0 404 Not Found"); 
-			throw new HaoFrameException('The $_GET is lack of the params!');
+			throw new HaoFrameException('Line:'.__LINE__.' Description:The $_GET is lack of the params!');
 		}
 	}
 }
@@ -184,7 +184,7 @@ final class View{
 				$smarty->plugins_dir	=	array('plugins');
 				return $smarty;
 			}else{
-				throw new HaoFrameException('The Smarty\'s File'.$file.' Does Not Exists!'); 
+				throw new HaoFrameException('Line:'.__LINE__.' Description:The Smarty\'s File'.$file.' Does Not Exists!'); 
 			}
 		}
 	}
@@ -213,7 +213,7 @@ class HaoFrameException extends Exception{
 spl_autoload_register('frameAutoload');
 function frameAutoload($class){
 	if(false === strpos($class, '_')){
-		throw new HaoFrameException($class.' Is Illegal!!');
+		throw new HaoFrameException('Line:'.__LINE__.' Description:'.$class.' Is Illegal!!');
 	}
 	list($_module, $_controller) = explode('_', $class);
 	$_module = substr($class, 0, strpos($class, '_'));
@@ -221,7 +221,7 @@ function frameAutoload($class){
 
 	$_file = FRAME_APP_DIR.$_module.DS.'class'.DS.str_replace('_', DS, $_model).'.class.php';
 	if(!file_exists($_file)){
-		throw new HaoFrameException($_file.' Does Not Exists!');
+		throw new HaoFrameException('Line:'.__LINE__.' Description:'.$_file.' Does Not Exists!');
 	}
 	require_once $_file;
 }
@@ -242,11 +242,11 @@ function load_class($class, $init=true){
 	if(file_exists($file)){
 		require_once $file;
 	}else{
-		throw new HaoFrameException(' Not Exists!');
+		throw new HaoFrameException('Line:'.__LINE__.'  Description:Not Exists!');
 	}
 
 	if(!class_exists($class)){
-		throw new HaoFrameException('The Class '.$class.' Not Exists!');
+		throw new HaoFrameException('Line:'.__LINE__.' Description:The Class '.$class.' Not Exists!');
 	}
 
 	

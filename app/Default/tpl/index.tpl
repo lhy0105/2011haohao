@@ -1,0 +1,1 @@
+{helper->part params=$test}{helper->trigger}This is Hao PHP HaoFramework frame-1.0 !{/helper->trigger}

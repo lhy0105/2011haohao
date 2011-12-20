@@ -14,7 +14,7 @@ defined('FRAME_ROOT_DIR')	|| define('FRAME_ROOT_DIR', dirname(__FILE__).DS);
 defined('FRAME_SMARTY_DIR') || define('FRAME_SMARTY_DIR', FRAME_ROOT_DIR.'lib'.DS.'Smarty'.DS);
 
 
-class HaoFrame{
+final class HaoFrame{
 	const VERSION = 'frame-1.0';
 	public $params = array('module' => 'Default','controller' => 'Page','action' => 'index');
 	public $demo_dir;
@@ -84,6 +84,7 @@ EOD;
 			}
 		}
 		/*}}}*/
+		return $this;
 	}
 
 	/*_________________________________________________________MVC*/
@@ -116,6 +117,7 @@ EOD;
 		}catch(HaoFrameException $e){
 			echo $e->getMessage();
 		}
+		return $this;
 	}
 
 	private function entry(){
@@ -158,6 +160,7 @@ abstract class Controller{
 			!empty($params) && ($smarty->assign($params));
 			$output = $smarty->fetch($tpl);
 			echo $output;
+			return $this;
 		}catch(Exception $e){
 			echo $e->getMessage();
 		}
@@ -212,6 +215,11 @@ class HaoFrameException extends Exception{
 
 spl_autoload_register('frameAutoload');
 function frameAutoload($class){
+	/* Compatible the Smarty*/
+	if(0 === strpos($class, 'Smarty') && function_exists('smartyAutoload')){
+		smartyAutoload($class);
+		return;
+	}
 	if(false === strpos($class, '_')){
 		throw new HaoFrameException('Line:'.__LINE__.' Description:'.$class.' Is Illegal!!');
 	}

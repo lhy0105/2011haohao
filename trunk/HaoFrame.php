@@ -195,10 +195,12 @@ final class View{
 
 /**
  * Smarty Tag Use
+ * Call: {helper->trigger t='1'}{/helper->trigger}
  */
 final class Helper{
 	static public $blocks = array('trigger');
 	public function trigger($params, $content, &$smarty, &$repeat){
+		var_dump(1);
 		if(is_null($content)) return ;
 		return '<span style="color:red">'.$content.'</span>';
 	}

@@ -1,6 +1,18 @@
 <?php
 class Default_Page extends Controller{
 	public function index(){
+		$a = array(1,3,8,9,10);
+		$i = 0xEF;
+		$index = 2;
+		array_push($a, 0);
+		$iLen = count($a);
+
+		for(;$iLen > 2;){
+			$a[--$iLen] = $a[($iLen-1)];
+		}
+		$a[$index] = $i;
+		var_dump($a);
+		return 0;
 		$arr = array('age'=>'30','name'=>'zhoubc','sexy'=>'male');
 		sort($arr);
 		var_dump($arr);
@@ -33,7 +45,6 @@ class Default_Page extends Controller{
 		$d = ceil($s/(24*60*60));
 		echo $d;
 		return 0;
-		$this->display('index.tpl', array('test'=>'Hao HaoFramework'));
 	}
 	public function test(){
 		$this->display('test.tpl');

@@ -13,7 +13,6 @@ defined('FRAME_APP_DIR')	|| define('FRAME_APP_DIR', dirname(__FILE__).DS.'app'.D
 defined('FRAME_ROOT_DIR')	|| define('FRAME_ROOT_DIR', dirname(__FILE__).DS);
 defined('FRAME_SMARTY_DIR') || define('FRAME_SMARTY_DIR', FRAME_ROOT_DIR.'lib'.DS.'Smarty'.DS);
 
-
 final class HaoFrame{
 	const VERSION = 'frame-1.0';
 	public $params = array('module' => 'Default','controller' => 'Page','action' => 'index');

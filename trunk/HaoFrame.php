@@ -18,13 +18,13 @@ final class HaoFrame{
 	public $params = array('module' => 'Default','controller' => 'Page','action' => 'index');
 	public $demo_dir;
 
-	/*Singleton Pattern{{{*/
-	public static function getInstance(){
-		static $_instance = NULL;
-		if($_instance === NULL){
-			$_instance = new self();
+	/*Multiton Pattern{{{*/
+	public static function getInstance($key = 'init'){
+		static $_instance = array();
+		if(!array_key_exists($key, $_instance)){
+			$_instance[$key] = new self();
 		}
-		return $_instance;
+		return $_instance[$key];
 	}
 	private function __construct()
 	{

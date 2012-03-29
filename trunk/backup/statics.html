@@ -1,0 +1,42 @@
+<html>
+<body>
+<h1>Statistics </h1>
+</body>
+</html>
+<script type="text/javascript">
+// Statistics
+var Page = {};
+Page.leftTimes = 0;
+Page.entryTimes = 0;
+
+
+Page.leftDuration = 0;
+Page.leftTime = 0;
+Page.img = new Image();
+Page.loadedTime = (new Date()).getTime();
+Page.backTime = 0;
+window.onfocus = function(){
+	if(0 != Page.entryTimes && Page.leftTimes == Page.entryTimes){ 
+		Page.leftDuration += (new Date()).getTime() - Page.leftTime;
+		Page.entryTimes++;
+
+		//console.log(Page.leftTimes + '[onfocus]' + Page.leftDuration);
+	}
+}
+
+window.onblur = function(){
+	Page.leftTime = (new Date()).getTime();
+	Page.leftTimes++;
+	Page.entryTimes = Page.leftTimes;
+	//console.log(Page.leftTimes + '[onblur]' + Date() + ';LeftTime:' + Page.leftTime);
+}
+
+window.onbeforeunload = function(){
+	var stopDuration = (new Date()).getTime() - Page.loadedTime;
+	var stopDurationNoBlur = stopDuration  - Page.leftDuration;
+	console.log(stopDuration + ':' + Page.leftDuration);
+
+	Page.img.src = 'http://www.baidu.com/log?tt=' + Math.ceil(stopDuration/1000) + '&&vt=' + Math.ceil(stopDurationNoBlur/1000);
+	return Page.img.src;
+}
+</script>

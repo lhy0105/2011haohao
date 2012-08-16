@@ -97,33 +97,33 @@ EOD;
 
 		if(count($_GET) && isset($_GET['r'])){
 			$_params = explode('_',$_GET['r']);
-			isset($_params[0]) && !empty($_params[0]) && ($_GET['module'] = ucfirst(strtolower($_params[0])));
-			isset($_params[1]) && !empty($_params[1]) && ($_GET['controller'] = ucfirst(strtolower($_params[1])));
-			isset($_params[2]) && !empty($_params[2]) && ($_GET['action'] = strtolower($_params[2]));
+			!empty($_params[0]) && ($_GET['module'] = ucfirst(strtolower($_params[0])));
+			!empty($_params[1]) && ($_GET['controller'] = ucfirst(strtolower($_params[1])));
+			!empty($_params[2]) && ($_GET['action'] = strtolower($_params[2]));
 		}
 
 		// Bundle Demo
-		$lock = FRAME_ROOT_DIR.'install.lock';
-		if(!file_exists($lock)){
+		$lockFile = FRAME_ROOT_DIR.'install.lock';
+		if(!file_exists($lockFile)){
 			$this->makeDemo();
-			$fp = fopen($lock, 'w');
+			$fp = fopen($lockFile, 'w');
 			fwrite($fp, 'lock');
 			fclose($fp);
 		}
 
 		try{
-			$this->entry();
+			$this->_entry();
 		}catch(HaoFrameException $e){
 			echo $e->getMessage();
 		}
 		return $this;
 	}
 
-	private function entry(){
+	private function _entry(){
 		if(isset($_GET['controller']) && isset($_GET['action'])){
-			$file = FRAME_APP_DIR.$_GET['module'].DS.'class'.DS.ucfirst($_GET['controller']).'.class.php';
-			if(file_exists($file)){
-				include $file;
+			$fileController = FRAME_APP_DIR.$_GET['module'].DS.'class'.DS.ucfirst($_GET['controller']).'.class.php';
+			if(file_exists($fileController)){
+				include $fileController;
 				$classname = $_GET['module'].'_'.$_GET['controller'];
 				if(class_exists($classname)){
 					$controller = new $classname;
@@ -149,15 +149,13 @@ EOD;
 }
 
 abstract class Controller{
-	public function __construct()
-	{
-	}
+	public function __construct(){}
 
 	public function display($tpl, $params=null){
 		try{
-			$smarty = View::getEngine();
+			$engine = View::getEngine();
 			!empty($params) && ($smarty->assign($params));
-			$output = $smarty->fetch($tpl);
+			$output = $engine->fetch($tpl);
 			echo $output;
 			return $this;
 		}catch(Exception $e){
@@ -174,9 +172,9 @@ final class View{
 		static $smarty = NULL;
 		if(NULL === $smarty){
 			$helper = new Helper();
-			$file = FRAME_SMARTY_DIR.'SmartyBC.class.php';
-			if(file_exists($file)){
-				require_once $file;
+			$fileSmarty = FRAME_SMARTY_DIR.'SmartyBC.class.php';
+			if(file_exists($fileSmarty)){
+				require_once $fileSmarty;
 				$smarty					=	new SmartyBC();
 				$smarty->compile_check	=	true;
 				$smarty->caching		=	0;
@@ -228,11 +226,11 @@ function frameAutoload($class){
 	$_module = substr($class, 0, strpos($class, '_'));
 	$_model = substr($class, strpos($class, '_')+1);
 
-	$_file = FRAME_APP_DIR.$_module.DS.'class'.DS.str_replace('_', DS, $_model).'.class.php';
-	if(!file_exists($_file)){
-		throw new HaoFrameException('Line:'.__LINE__.' Description:'.$_file.' Does Not Exists!');
+	$_fileModel = FRAME_APP_DIR.$_module.DS.'class'.DS.str_replace('_', DS, $_model).'.class.php';
+	if(!file_exists($_fileModel)){
+		throw new HaoFrameException('Line:'.__LINE__.' Description:'.$_fileModel.' Does Not Exists!');
 	}
-	require_once $_file;
+	require_once $_fileModel;
 }
 
 /**

@@ -4,7 +4,7 @@
  * @date 2011-09-08
  * @author 周宝川(ch) Dennis(en)
  * @email baochuanzhou@gmail.com
- * @blog rtxbc.iteye.com
+ * @blog www.cnblogs.com/baochuan
  */
 
 defined('DS')				|| define('DS', DIRECTORY_SEPARATOR);
@@ -12,6 +12,22 @@ defined('DS')				|| define('DS', DIRECTORY_SEPARATOR);
 defined('FRAME_APP_DIR')	|| define('FRAME_APP_DIR', dirname(__FILE__).DS.'app'.DS);
 defined('FRAME_ROOT_DIR')	|| define('FRAME_ROOT_DIR', dirname(__FILE__).DS);
 defined('FRAME_SMARTY_DIR') || define('FRAME_SMARTY_DIR', FRAME_ROOT_DIR.'lib'.DS.'Smarty'.DS);
+
+defined('ENVIROMENT') || define('ENVIROMENT', 'development');
+switch(ENVIROMENT){
+case 'development':
+	error_reporting(E_ALL);
+	break;
+case 'product':
+	error_reporting(0);
+	break;
+default:
+	exit('The application is not set correctly!');
+}
+
+session_start();
+
+include FRAME_ROOT_DIR.'/lib/Core/global.func.php';
 
 final class HaoFrame{
 	const VERSION = 'frame-1.0';
@@ -154,7 +170,7 @@ abstract class Controller{
 	public function display($tpl, $params=null){
 		try{
 			$engine = View::getEngine();
-			!empty($params) && ($smarty->assign($params));
+			!empty($params) && ($engine->assign($params));
 			$output = $engine->fetch($tpl);
 			echo $output;
 			return $this;
@@ -181,7 +197,8 @@ final class View{
 				$smarty->compile_dir	=	FRAME_ROOT_DIR.'cache';
 				$smarty->template_dir	=	FRAME_APP_DIR.$_GET['module'].DS.'tpl';
 				$smarty->register_object('helper', $helper, null, true, Helper::$blocks);
-				$smarty->plugins_dir	=	array('plugins');
+				$smarty->plugins_dir	=	array(FRAME_SMARTY_DIR.'plugins');
+				//var_dump($smarty);exit();
 				return $smarty;
 			}else{
 				throw new HaoFrameException('Line:'.__LINE__.' Description:The Smarty\'s File'.$file.' Does Not Exists!'); 
@@ -197,11 +214,11 @@ final class View{
 final class Helper{
 	static public $blocks = array('trigger');
 	public function trigger($params, $content, &$smarty, &$repeat){
-		var_dump(1);
 		if(is_null($content)) return ;
 		return '<span style="color:red">'.$content.'</span>';
 	}
 	public function part($params, &$smarty){
+		var_dump(__METHOD__);
 		return 'part';
 	}
 }
@@ -219,18 +236,22 @@ function frameAutoload($class){
 		smartyAutoload($class);
 		return;
 	}
-	if(false === strpos($class, '_')){
-		throw new HaoFrameException('Line:'.__LINE__.' Description:'.$class.' Is Illegal!!');
-	}
-	list($_module, $_controller) = explode('_', $class);
-	$_module = substr($class, 0, strpos($class, '_'));
-	$_model = substr($class, strpos($class, '_')+1);
+	if(file_exists(FRAME_ROOT_DIR.'/lib/Core/'.$class.'.class.php')){
+		require_once FRAME_ROOT_DIR.'/lib/Core/'.$class.'.class.php';
+	}else{
+		if(false === strpos($class, '_')){
+			throw new HaoFrameException('Line:'.__LINE__.' Description:'.$class.' Is Illegal!!');
+		}
+		list($_module, $_controller) = explode('_', $class);
+		$_module = substr($class, 0, strpos($class, '_'));
+		$_model = substr($class, strpos($class, '_')+1);
 
-	$_fileModel = FRAME_APP_DIR.$_module.DS.'class'.DS.str_replace('_', DS, $_model).'.class.php';
-	if(!file_exists($_fileModel)){
-		throw new HaoFrameException('Line:'.__LINE__.' Description:'.$_fileModel.' Does Not Exists!');
+		$_fileModel = FRAME_APP_DIR.$_module.DS.'class'.DS.str_replace('_', DS, $_model).'.class.php';
+		if(!file_exists($_fileModel)){
+			throw new HaoFrameException('Line:'.__LINE__.' Description:'.$_fileModel.' Does Not Exists!');
+		}
+		require_once $_fileModel;
 	}
-	require_once $_fileModel;
 }
 
 /**

@@ -11,14 +11,16 @@ a:hover,a:active,a:focus{color:#c00;text-decoration:underline;}
 .line{height:4px;background:#CCC;margin:0 auto;}
 .loading{border:0px solid #CCC;padding:3px;margin:80px;font-size:14px;color:#444343;}
 .w900{width:900px;}
+.btn{cursor:pointer;}
 
 .top{height:30px;line-height:30px;background:#E5E5E5;margin:0 auto;padding:4px;}
-.top span{font-size:18px;font-weight:bold;display:block;margin-top:8px;margin-left:2px;}
+.top span{font-size:18px;font-weight:bold;display:block;margin-top:8px;margin-left:2px;float:left;}
+.top a{display:block;float:right;width:100px;margin-top:8px;}
 
 .page{margin:0 auto;}
 .page .left{width:100px;float:left;}
 .page .indexInfo{}
-.page .tt{text-indent:10px;font-size:14px;font-weight:bold;height:30px;line-height:30px;background:#E5E5E5;}
+.page .tt{text-indent:10px;font-size:14px;font-weight:bold;height:30px;line-height:30px;border-bottom:1px solid #999;}
 .page .cc{margin-top:10px;}
 .page .cc li{height:25px;line-height:25px;}
 .page .notice{height:30px;line-height:30px; border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;}
@@ -41,15 +43,29 @@ a:hover,a:active,a:focus{color:#c00;text-decoration:underline;}
 .pay_type li{text-indent:10px;height:20px;line-height:20px;}
 .pay_type .ico{;background:url(master_admin.png) no-repeat 0px 0px;display:block;float:left;width:10px;height:20px;margin-left:10px;}
 
+.pay_add{padding:10px;}
+.pay_add span{font-size:13px;font-weight:bold;}
+.pay_add li{width:100px;float:left;margin-bottom:3px;border-bottom:1px solid #E5E5E5;}
+.pay_add .ammount{clear:both;width:500px;}
+.pay_add .note{clear:both;width:500px;}
+.pay_add .btn_add{clear:both;width:500px;text-align:center;}
+
 
 
 .pay_content{width:550px;float:left;}
 .pay_content .head li{background:#999;height:30px;line-height:30px;color:#fff;font-weight:bold;}
+
+
+.head{clear:both;}
+.head .type{font-size:14px;font-weight:bold;float:left;width:100px;}
+.head .name{float:left;width:300px;}
+
 .box li{float:left;font-size:14px;text-align:center;height:20px;line-height:20px;}
 .box .id{width:100px;}
 .box .name{width:100px;}
 .box .ammount{width:100px;}
 .box .date{width:200px;}
+.box .note{width:200px;}
 
 /*window dialog*/
 .qwindow{z-index:30000;position:absolute;top:0;left:0;padding:10px;visibility:hidden;}

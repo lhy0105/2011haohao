@@ -8,6 +8,7 @@
 <body>
 	<div class="top w900">
 		<span>{$smarty.const.ADMIN_TITLE}</span>
+		<a href="?r=__logout">退出</a>
 	</div>
 	<div class="clearit line" style="width:908px;"></div>
 	<div class="page w900" id="Page">
@@ -32,6 +33,8 @@
 						<ul>
 							<li><span>本次登陆IP:</span>{$clientIP}</li>
 							<li><span>本次登陆时间:</span>{$smarty.now|date_format:'Y-m-d H:i:s':'':''}</li>
+							<li><span>上次登陆IP:</span>{$user->last_ip}</li>
+							<li><span>上次登陆时间:</span>{$user->last_date}</li>
 						</ul>
 					</div>
 					<div class="notice">

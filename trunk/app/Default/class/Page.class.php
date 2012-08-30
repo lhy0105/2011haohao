@@ -14,15 +14,19 @@ class Default_Page extends Controller{
 			$username = $_POST['u'];
 			$password = md5($_POST['p']);
 
-			$user = new Default_Model_User();
-			if(!$user->login($username, $password)){
+			if(!$user = (new Default_Model_User())->login($username, $password)){
 				echo 'failure';
 			}else{
-				$_SESSION['userId'] = true;
+				$_SESSION['userId'] = $user->id;
 				echo 'successful';
 			}
 		}else{
 			$this->display('login.tpl');
 		}
+	}
+
+	public function logout(){
+		(new Default_Model_User())->logout();
+		header('Location:index.php?r=__login');
 	}
 }

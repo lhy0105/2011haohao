@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2012-08-28 09:45:26
+<?php /* Smarty version Smarty-3.1.11, created on 2012-08-30 10:53:32
          compiled from "/home/www/2011haohao/app/Default/tpl/pay_index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:19934873835035f0394fa863-78405774%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2a595e7388a64a1b1a9c64c010d44c038ded1a9a' => 
     array (
       0 => '/home/www/2011haohao/app/Default/tpl/pay_index.tpl',
-      1 => 1345800161,
+      1 => 1346295193,
       2 => 'file',
     ),
   ),
@@ -42,7 +42,7 @@ $_smarty_tpl->tpl_vars['type']->_loop = true;
 foreach ($_from as $_smarty_tpl->tpl_vars['sub']->key => $_smarty_tpl->tpl_vars['sub']->value){
 $_smarty_tpl->tpl_vars['sub']->_loop = true;
 ?>
-			<li><span class="ico"></span><a href="##" onclick="Menu.changePayContent(this)" data="_pay_getContent&id=<?php echo $_smarty_tpl->tpl_vars['sub']->value->id;?>
+			<li><span class="ico"></span><a href="##" onclick="Menu.changePayContent(this)" data="_pay_listContent&id=<?php echo $_smarty_tpl->tpl_vars['sub']->value->id;?>
 "><?php echo $_smarty_tpl->tpl_vars['sub']->value->name;?>
 </a></li>
 			<?php } ?>
@@ -61,7 +61,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['type']->key => $_smarty_tpl->tpl_vars
 $_smarty_tpl->tpl_vars['type']->_loop = true;
 ?>
 				<li><a href="##" data="_pay_add&id=<?php echo $_smarty_tpl->tpl_vars['type']->value->id;?>
-" onclick="Menu.addPayContent(this);">添加<?php echo $_smarty_tpl->tpl_vars['type']->value->name;?>
+" onclick="Menu.addPayHTML(this);">添加<?php echo $_smarty_tpl->tpl_vars['type']->value->name;?>
 </a></li>
 				<?php } ?>
 			</ul>

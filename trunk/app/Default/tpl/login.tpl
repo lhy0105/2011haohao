@@ -22,10 +22,10 @@ ul,ol{list-style-type:none;}
 	<div class="login">
 		<h1>登陆</h1>
 		<ul>
-			<li><span>用户名:</span><input type="text" name="username"/>
+			<li><span>用户名:</span><input type="text" name="username" value="test"/>
 				<div class="tips"></div>	
 			</li>
-			<li><span>密码:</span><input type="password" name="passwd"/>
+			<li><span>密码:</span><input type="password" name="passwd" value="123123"/>
 				<div class="tips"></div>	
 			</li>
 			<li>
@@ -40,10 +40,10 @@ ul,ol{list-style-type:none;}
 <script type="text/javascript" src="public/js/jquery-1.8.0.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('input[type!=submit]').focus(function(){
+		$('input[type!=submit]').focus(function(){
 			$('.tips').hide();
-		});
-	$('#btn').click(function(){
+			});
+		$('#btn').click(function(){
 		$('.tips').hide();
 
 		var username = $('input[name="username"]').val();

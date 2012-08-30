@@ -13,12 +13,12 @@ class Default_Pay extends Controller{
 		$this->display('pay_index.tpl', $params);
 	}
 
-	public function getContent(){
+	public function listContent(){
 		!isset($_GET['id']) && exit('The input is illegal!!!');
 		$id = intval($_GET['id']);
 
 		$pay = new Default_Model_Pay();
-		$params['pays'] = $pay->getPayById($id);
+		$params['pays'] = $pay->listById($id);
 		$this->display('pay_content.tpl', $params);
 	}
 
@@ -30,5 +30,15 @@ class Default_Pay extends Controller{
 		$params['pays'] = $pay->getPayById($id);
 		$params['types'] = $pay->listType();
 		$this->display('pay_add.tpl', $params);
+	}
+
+	public function addContent(){
+		$pay = new Default_Model_Pay();
+
+		$ammount = $_POST['ammount'];
+		$typeId = $_POST['typeId'];
+		$note = $_POST['note'];
+
+		$pay->addContent($ammount, $typeId, $note);
 	}
 }

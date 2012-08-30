@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2012-08-28 10:52:43
+<?php /* Smarty version Smarty-3.1.11, created on 2012-08-29 16:37:15
          compiled from "/home/www/2011haohao/app/Default/tpl/login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5752504850335702b9eea7-59147467%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '04bc1c159486f209795aac2e4d7284aae6840139' => 
     array (
       0 => '/home/www/2011haohao/app/Default/tpl/login.tpl',
-      1 => 1345684685,
+      1 => 1346211803,
       2 => 'file',
     ),
   ),
@@ -43,10 +43,10 @@ ul,ol{list-style-type:none;}
 	<div class="login">
 		<h1>登陆</h1>
 		<ul>
-			<li><span>用户名:</span><input type="text" name="username"/>
+			<li><span>用户名:</span><input type="text" name="username" value="test"/>
 				<div class="tips"></div>	
 			</li>
-			<li><span>密码:</span><input type="password" name="passwd"/>
+			<li><span>密码:</span><input type="password" name="passwd" value="123123"/>
 				<div class="tips"></div>	
 			</li>
 			<li>
@@ -61,10 +61,10 @@ ul,ol{list-style-type:none;}
 <script type="text/javascript" src="public/js/jquery-1.8.0.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('input[type!=submit]').focus(function(){
+		$('input[type!=submit]').focus(function(){
 			$('.tips').hide();
-		});
-	$('#btn').click(function(){
+			});
+		$('#btn').click(function(){
 		$('.tips').hide();
 
 		var username = $('input[name="username"]').val();

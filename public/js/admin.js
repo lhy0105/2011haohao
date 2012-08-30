@@ -27,20 +27,30 @@ var Menu = {
 			}
 		});
 	},
-	addPayContent:function(o){
+	addPayHTML:function(o){
 		var url = '?r=' + o.getAttribute('data');
+		popwin.setTitle(o.innerHTML)
+			.showTitle()
+			.setContent('iframe', url)
+			.setPos('middle', 'center')
+			.setSize(600, 520)
+			.show();
+	},
+	addPayContent:function(){
+		var typeId = $('input[name="typeId"]:checked').val();
+		var ammount = $('input[name="ammount"]').val();
+		var note = $('textarea[name="note"]').val();
+
 		$.ajax({
-			type:'GET',
-			url:url,
+			type:'POST',
+			url:'?r=_pay_addContent',
+			data:'typeId='+typeId+'&ammount='+ammount+'&note='+note,
 			success:function(msg){
-				popwin.setTitle(o.innerHTML)
-					.showTitle()
-					.setContent('html', msg)
-					.setPos('middle', 'center')
-					.setSize(600, 520)
-					.show();
+				parent.popwin.hide();
 			}
 		});
+
 	}
 }
+
 

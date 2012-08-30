@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2012-08-28 09:42:10
+<?php /* Smarty version Smarty-3.1.11, created on 2012-08-28 21:37:11
          compiled from "/home/www/2011haohao/app/Default/tpl/page.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5069874905035823902ad75-69053002%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd845e8bea39a2753873395252023e749319c2eca' => 
     array (
       0 => '/home/www/2011haohao/app/Default/tpl/page.tpl',
-      1 => 1346118113,
+      1 => 1346161030,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'clientIP' => 0,
+    'user' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -36,6 +37,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	<div class="top w900">
 		<span><?php echo @ADMIN_TITLE;?>
 </span>
+		<a href="?r=__logout">退出</a>
 	</div>
 	<div class="clearit line" style="width:908px;"></div>
 	<div class="page w900" id="Page">
@@ -61,6 +63,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 							<li><span>本次登陆IP:</span><?php echo $_smarty_tpl->tpl_vars['clientIP']->value;?>
 </li>
 							<li><span>本次登陆时间:</span><?php echo smarty_modifier_date_format(time(),'Y-m-d H:i:s','','');?>
+</li>
+							<li><span>上次登陆IP:</span><?php echo $_smarty_tpl->tpl_vars['user']->value->last_ip;?>
+</li>
+							<li><span>上次登陆时间:</span><?php echo $_smarty_tpl->tpl_vars['user']->value->last_date;?>
 </li>
 						</ul>
 					</div>

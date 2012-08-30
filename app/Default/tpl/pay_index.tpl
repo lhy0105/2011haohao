@@ -6,7 +6,7 @@
 		{if !empty($type->sub)}
 		<ul>
 			{foreach name=sub from=$type->sub item=sub}
-			<li><span class="ico"></span><a href="##" onclick="Menu.changePayContent(this)" data="_pay_getContent&id={$sub->id}">{$sub->name}</a></li>
+			<li><span class="ico"></span><a href="##" onclick="Menu.changePayContent(this)" data="_pay_listContent&id={$sub->id}">{$sub->name}</a></li>
 			{/foreach}
 		</ul>
 		{/if}
@@ -18,7 +18,7 @@
 		<div class="sub">
 			<ul>
 				{foreach name=type from=$types item=type}
-				<li><a href="##" data="_pay_add&id={$type->id}" onclick="Menu.addPayContent(this);">添加{$type->name}</a></li>
+				<li><a href="##" data="_pay_add&id={$type->id}" onclick="Menu.addPayHTML(this);">添加{$type->name}</a></li>
 				{/foreach}
 			</ul>
 		</div>

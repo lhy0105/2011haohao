@@ -18,6 +18,7 @@ class Default_Model_User extends Db{
 		$sql = "UPDATE user SET last_date =:last_date,last_ip=:last_ip WHERE id =:user_id";
 		$stmt = $this->getDbh()->prepare($sql);
 		$stmt->execute(array(':last_date' => date('Y-m-d H:i:s'), ':last_ip' => getClientIP(), ':user_id' => $_SESSION['userId']));
+		session_destroy();
 	}
 
 	public static function authorize(){

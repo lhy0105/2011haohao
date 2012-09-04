@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chart>
+	{if !empty($pay->pays)}
+	<series>
+		{foreach name=date from=$pay->date item=date}
+		<value xid="{$date}">{$date}</value>
+		{/foreach}
+	</series>
+	<graphs>
+		{foreach name=pay from=$pay->pays key=name item=pays}
+		<graph gid="{$smarty.foreach.pay.iteration}" title="{$name}" line_width="2" bullet="round" color="#{php}$color = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');$key = array_rand($color, 1);echo $color[$key];{/php}CD{php}echo rand(201,999);{/php}">
+			{foreach name=p from=$pays item=v}
+			<value xid="{$v->pay_date|date_format:'Y-m-d'}">{$v->ammount}</value>
+			{/foreach}
+		</graph>
+		{/foreach}
+	</graphs>
+	{else}
+	<series>
+		<value xid="0">0</value>
+	</series>
+	<graphs>
+		<graph gid="0" title="没有数据" line_width="2" bullet="round" color="#{php}$color = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');$key = array_rand($color, 1);echo $color[$key];{/php}CD{php}echo rand(201,999);{/php}">
+			<value xid="0">0</value>
+		</graph>
+	</graphs>
+	{/if}
+</chart>

@@ -8,6 +8,9 @@ var Menu = {
 		$('#Content').html(loadingHtml);
 
 		var url = '?r=' + o.getAttribute('data');
+		this.updateContent(url);
+	},
+	updateContent:function(url){
 		$.ajax({
 			type:'POST',
 			url:url,
@@ -18,6 +21,10 @@ var Menu = {
 	},
 	changePayContent:function(o){
 		var url = '?r=' + o.getAttribute('data');
+		$('#PayType li').each(function(){
+			$(this).removeClass();
+		});
+		o.parentNode.className = 'current';
 		$('#PayContentBody').html(loadingHtml);
 		$.ajax({
 			type:'GET',
@@ -40,17 +47,35 @@ var Menu = {
 		var typeId = $('input[name="typeId"]:checked').val();
 		var ammount = $('input[name="ammount"]').val();
 		var note = $('textarea[name="note"]').val();
+		var pay_date= $('input[name="pay_date"]').val();
 
 		$.ajax({
 			type:'POST',
 			url:'?r=_pay_addContent',
-			data:'typeId='+typeId+'&ammount='+ammount+'&note='+note,
+			data:'typeId='+typeId+'&ammount='+ammount+'&note='+note+'&pay_date='+pay_date,
 			success:function(msg){
 				parent.popwin.hide();
+				//window.top.location.reload();
+				parent.Menu.updateContent('?r=_pay_');
 			}
 		});
 
 	}
 }
 
-
+function showStatistics(id, flashVars){
+	if (swfobject.hasFlashPlayerVersion("8"))
+	{
+		swfobject.embedSWF("public/amcharts/flash/amline.swf",id, "600", "400", "8.0.0", "public/amcharts/flash/expressInstall.swf", flashVars, {bgcolor:'#FFFFFF'});
+	}
+	else
+	{
+		// Note, as this example loads external data, JavaScript version might only work on server
+		var amFallback = new AmCharts.AmFallback();
+		amFallback.pathToImages = "public/amcharts/images/"
+		amFallback.settingsFile = flashVars.settings_file;
+		amFallback.dataFile = flashVars.data_file;				
+		amFallback.type = "line";
+		amFallback.write(id);
+	}
+}

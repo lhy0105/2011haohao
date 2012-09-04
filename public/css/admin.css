@@ -35,11 +35,12 @@ a:hover,a:active,a:focus{color:#c00;text-decoration:underline;}
 
 .foot{}
 
-/*~		Pay-Type	~*/
+/*~		Pay	~*/
 .pay_type{width:100px;float:left;}
 .pay_type h1{font-size:16px;}
 .pay_type .head{margin-top:3px;}
 .pay_type .head h1{font-size:14px;font-weight:600;}
+.pay_type .current{border-bottom:1px dashed #FF9C08;}
 .pay_type li{text-indent:10px;height:20px;line-height:20px;}
 .pay_type .ico{;background:url(master_admin.png) no-repeat 0px 0px;display:block;float:left;width:10px;height:20px;margin-left:10px;}
 
@@ -49,11 +50,13 @@ a:hover,a:active,a:focus{color:#c00;text-decoration:underline;}
 .pay_add .ammount{clear:both;width:500px;}
 .pay_add .note{clear:both;width:500px;}
 .pay_add .btn_add{clear:both;width:500px;text-align:center;}
+.pay_add input{font-size:12px;}
 
 
 
-.pay_content{width:550px;float:left;}
+.pay_content{width:690px;float:left;}
 .pay_content .head li{background:#999;height:30px;line-height:30px;color:#fff;font-weight:bold;}
+.pay_content .sub li{text-align:center;cursor:pointer;float:left;border:1px solid #999; width:100px;height:20px;line-height:20px;display:block;margin:2px;padding:2px;background-color:#E5E5E5;letter-spacing:1px;}
 
 
 .head{clear:both;}
@@ -65,7 +68,14 @@ a:hover,a:active,a:focus{color:#c00;text-decoration:underline;}
 .box .name{width:100px;}
 .box .ammount{width:100px;}
 .box .date{width:200px;}
-.box .note{width:200px;}
+.box .pay_note{width:200px;overflow:hidden;}
+.body li{border-bottom:1px solid #999;}
+.body .line li{background:#E5E5E5;}
+
+/*~		统计图		~*/
+.chardiv_tt{float:left;border-bottom:1px solid #E5E5E5;width:650px;}
+.chardiv_tt span{display:block;clear:both;font-size:14px;font-weight:bold;float:left;}
+.chardiv_tt a{display:block;float:right;cursor:pointer;}
 
 /*window dialog*/
 .qwindow{z-index:30000;position:absolute;top:0;left:0;padding:10px;visibility:hidden;}

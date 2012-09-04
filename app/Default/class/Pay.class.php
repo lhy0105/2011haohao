@@ -38,7 +38,15 @@ class Default_Pay extends Controller{
 		$ammount = $_POST['ammount'];
 		$typeId = $_POST['typeId'];
 		$note = $_POST['note'];
+		$payDate = $_POST['pay_date'];
 
-		$pay->addContent($ammount, $typeId, $note);
+		$pay->addContent($ammount, $typeId, $note, $payDate);
+	}
+
+	public function statistics(){
+		$pay = new Default_Model_Pay();
+		$sid = intval($_GET['id']);
+		$params['pay'] = $pay->statistics($sid);
+		$this->display('data.xml', $params);
 	}
 }

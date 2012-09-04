@@ -116,6 +116,9 @@ EOD;
 			!empty($_params[0]) && ($_GET['module'] = ucfirst(strtolower($_params[0])));
 			!empty($_params[1]) && ($_GET['controller'] = ucfirst(strtolower($_params[1])));
 			!empty($_params[2]) && ($_GET['action'] = strtolower($_params[2]));
+			if(isset($_params[3]) && isset($_params[4])){
+				$_GET[$_params[3]] = $_params[4];
+			}
 		}
 
 		// Bundle Demo

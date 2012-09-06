@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2012-08-28 21:37:11
+<?php /* Smarty version Smarty-3.1.11, created on 2012-09-04 16:23:13
          compiled from "/home/www/2011haohao/app/Default/tpl/page.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5069874905035823902ad75-69053002%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd845e8bea39a2753873395252023e749319c2eca' => 
     array (
       0 => '/home/www/2011haohao/app/Default/tpl/page.tpl',
-      1 => 1346161030,
+      1 => 1346731256,
       2 => 'file',
     ),
   ),
@@ -46,11 +46,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				<h4>菜单导航</h4>
 				<ul>
 					<li class="current"><a href="##" data="_pay_" onclick="Menu.changeContent(this)">收支管理</a></li>
-					<li><a href="##" data="_admin_role" onclick="Menu.changeContent(this)">角色管理</a></li>
+					<li><a href="##" data="_book_" onclick="Menu.changeContent(this)">读书计划</a></li>
+					<!--<li><a href="##" data="_admin_role" onclick="Menu.changeContent(this)">角色管理</a></li>
 					<li><a href="##" data="_admin_organization" onclick="Menu.changeContent(this)">组织结构</a></li>
 					<li><a href="##" data="_admin_user" onclick="Menu.changeContent(this)">用户管理</a></li>
 					<li><a href="##" data="_admin_system" onclick="Menu.changeContent(this)">系统配置</a></li>
-					<li><a href="##" data="_admin_log" onclick="Menu.changeContent(this)">系统日志</a></li>
+					<li><a href="##" data="_admin_log" onclick="Menu.changeContent(this)">系统日志</a></li>-->
 				</ul>
 			</div>
 		</div>

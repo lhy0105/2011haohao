@@ -25,7 +25,7 @@
 		<script type="text/javascript">
 			{literal}
 			$(function(){
-					showStatistics("chartdiv{/literal}{$type->id}{literal}", {path:"public/amcharts/flash/",settings_file: "public/amcharts/settings.xml",data_file:"?r=_pay_statistics_id_{/literal}{$type->id}{literal}"});
+					showStatistics("chartdiv{/literal}{$type->id}{literal}", {path:"public/amcharts/flash/",settings_file: "public/amcharts/settings.xml",data_file:"?r=_pay_statistics_id_{/literal}{$type->id}{literal}"}, 'line', 'amline.swf');
 			});
 			{/literal}
         </script>

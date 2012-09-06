@@ -89,8 +89,8 @@ class Default_Model_Pay extends Db{
 		$dates = array();
 		$payGroup = array();
 		if(count($pays) > 1){
-			$beginDate = $pays[0]->pay_date;
-			$endDate = end($pays)->pay_date;
+			/*$beginDate = substr($pays[0]->pay_date,0,10);
+			$endDate = substr(end($pays)->pay_date,0, 10);
 			$endNum = intval((strtotime($beginDate) - strtotime($endDate))/(24*60*60)) + 1;
 
 			for($i = 0; $i < $endNum; $i++){
@@ -100,8 +100,19 @@ class Default_Model_Pay extends Db{
 					$endDate = date('Y-m-d', strtotime($endDate));
 				}
 				$dates[] = $endDate;
+			}*/
+
+			$order = array();
+			foreach($pays as $v){
+				$order[] = $v->pay_date;
+				$date = substr($v->pay_date, 0, 10);
+				if(!in_array($date, $dates)){
+					$dates[] = $date;
+				}
 			}
 
+			krsort($dates);
+			array_multisort($order, SORT_ASC, $pays);
 			foreach($pays as $v){
 				$payGroup[$v->name][] = $v;
 			}

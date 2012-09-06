@@ -1,5 +1,5 @@
 var loadingHtml = '<div class="loading"><img src="public/loading.gif" style="width:20px;height:20px;"/>&nbsp;&nbsp;数据加载中，请稍后...</div>';
-var popwin = new Qwindow();
+if(typeof(Qwindow) != 'undefined') var popwin = new Qwindow();
 var Menu = {
 	changeContent:function(o){
 		$('.menu li').each(function(){this.className = '';});
@@ -63,10 +63,10 @@ var Menu = {
 	}
 }
 
-function showStatistics(id, flashVars){
+function showStatistics(id, flashVars, type, swfFile){
 	if (swfobject.hasFlashPlayerVersion("8"))
 	{
-		swfobject.embedSWF("public/amcharts/flash/amline.swf",id, "600", "400", "8.0.0", "public/amcharts/flash/expressInstall.swf", flashVars, {bgcolor:'#FFFFFF'});
+		swfobject.embedSWF("public/amcharts/flash/" + swfFile,id, "600", "400", "8.0.0", "public/amcharts/flash/expressInstall.swf", flashVars, {bgcolor:'#FFFFFF'});
 	}
 	else
 	{
@@ -75,7 +75,74 @@ function showStatistics(id, flashVars){
 		amFallback.pathToImages = "public/amcharts/images/"
 		amFallback.settingsFile = flashVars.settings_file;
 		amFallback.dataFile = flashVars.data_file;				
-		amFallback.type = "line";
+		amFallback.type =type 
 		amFallback.write(id);
 	}
+}
+
+function warning(msg, obj){
+	var html = '<div class="warning" style="position:absolute;left:20px;top:20px;padding:10px;border:1px solid #E5E5E5;background:#FFF;z-index:90000;">' + msg + '</div>';
+	obj.append(html);
+}
+
+function ajax_update(id, url){
+	$('#' + id).html(loadingHtml);
+	$("#" + id).load(url);
+}
+
+var book = {
+	addHTML:function(o){
+		var url = "?r=_book_addTpl";
+		popwin.setTitle(o.innerHTML)
+			.showTitle()
+			.setContent('iframe', url)
+			.setPos('middle', 'center')
+			.setSize(620, 300)
+			.show();
+	},
+	addContent:function(){
+		var valid = true;
+		var name = $('input[name="name"]').val();
+		var date_begin = $('input[name="date_begin"]').val();
+		var date_end = $('input[name="date_end"]').val();
+		var note = $('textarea[name="note"]').val();
+
+		if(name == ''){
+			warning('书名不能为空!', $('input[name="name"]').parent());
+			valid = false;
+			return false;
+		}
+
+		if(!/^\d{4}-\d{2}-\d{2}$/.test(date_begin)){
+			warning('开始日期输入有误!', $('input[name="date_begin"]').parent());
+			valid = false;
+			return false;
+		}
+
+		if(!/^\d{4}-\d{2}-\d{2}$/.test(date_end)){
+			warning('结束日期输入有误!', $('input[name="date_end"]').parent());
+			valid = false;
+			return false;
+		}
+		$.ajax({
+			type:'POST',
+			url:'?r=_book_addContent',
+			data:'name='+name+'&date_begin='+date_begin+'&note='+note+'&date_end='+date_end,
+			success:function(msg){
+				parent.popwin.hide();
+				//window.top.location.reload();
+				parent.Menu.updateContent('?r=_book_');
+			}
+		});
+	}
+}
+
+function selectAll(name, id){
+	$('input[name="' + name+ '"]').each(function(){
+		if($(this).attr('checked') == 'checked'){
+			$(this).attr('checked', false);
+		}else{
+			$(this).attr('checked', true);
+		}
+	});
 }

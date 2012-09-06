@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2012-08-30 11:19:01
+<?php /* Smarty version Smarty-3.1.11, created on 2012-09-06 09:43:05
          compiled from "/home/www/2011haohao/app/Default/tpl/pay_content.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17025453395035e32b24b762-90706072%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '743f80dea0f48ccbb85f66218857ad076efdf65b' => 
     array (
       0 => '/home/www/2011haohao/app/Default/tpl/pay_content.tpl',
-      1 => 1346296739,
+      1 => 1346838995,
       2 => 'file',
     ),
   ),
@@ -36,24 +36,28 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 		<li class="id">标识</li>
 		<li class="ammount">收支金额</li>
 		<li class="date">收支日期</li>
-		<li class="name">明细</li>
+		<li class="pay_note">明细</li>
 	</ul>
 	<?php  $_smarty_tpl->tpl_vars['pay'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['pay']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['pays']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_smarty_tpl->tpl_vars['smarty']->value['foreach']['pay']['iteration']=0;
 foreach ($_from as $_smarty_tpl->tpl_vars['pay']->key => $_smarty_tpl->tpl_vars['pay']->value){
 $_smarty_tpl->tpl_vars['pay']->_loop = true;
+ $_smarty_tpl->tpl_vars['smarty']->value['foreach']['pay']['iteration']++;
 ?>
-	<ul class="box">
+	<ul class="box body<?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['pay']['iteration']%2==0){?> line<?php }?>">
 		<li class="id"><input type="checkbox"  name="pay" value="<?php echo $_smarty_tpl->tpl_vars['pay']->value->id;?>
 "></li>
 		<li class="ammount"><?php echo $_smarty_tpl->tpl_vars['pay']->value->ammount;?>
 </li>
 		<li class="date"><?php echo $_smarty_tpl->tpl_vars['pay']->value->pay_date;?>
 </li>
-		<li class="name"><?php echo $_smarty_tpl->tpl_vars['pay']->value->note;?>
+		<li class="pay_note"><?php echo $_smarty_tpl->tpl_vars['pay']->value->note;?>
 </li>
 	</ul>
 	<?php } ?>
+	<div class="box food">
+	</div>
 	<?php }else{ ?>
 	暂无内容
 	<?php }?>

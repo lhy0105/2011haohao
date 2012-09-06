@@ -200,7 +200,7 @@ final class View{
 				$smarty->compile_dir	=	FRAME_ROOT_DIR.'cache';
 				$smarty->template_dir	=	FRAME_APP_DIR.$_GET['module'].DS.'tpl';
 				$smarty->register_object('helper', $helper, null, true, Helper::$blocks);
-				$smarty->plugins_dir	=	array(FRAME_SMARTY_DIR.'plugins');
+				$smarty->plugins_dir	=	array(FRAME_SMARTY_DIR.'plugins', FRAME_ROOT_DIR.'lib/Core/plugins');
 				//var_dump($smarty);exit();
 				return $smarty;
 			}else{

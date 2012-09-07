@@ -7,7 +7,7 @@
 .s_body{margin:0 auto;width:900px;}
 ul,ol{list-style-type:none;}
 
-.login{margin:100px auto;width:400px;border:1px solid blue;padding:20px;background:#E5E5E5;}
+.login{margin:100px auto;width:400px;border:1px solid #CCCCCC;padding:20px;background:#E5E5E5;}
 
 .login h1{text-align:center; font-size:1.5em;letter-spacing:10px;}
 .login li{position:relative;width:300px;height:35px;font-size:14px;}
@@ -22,10 +22,13 @@ ul,ol{list-style-type:none;}
 	<div class="login">
 		<h1>登陆</h1>
 		<ul>
-			<li><span>用户名:</span><input type="text" name="username" value="test"/>
+			<li><span>用户名:</span><input type="text" name="username" value=""/>
 				<div class="tips"></div>	
 			</li>
-			<li><span>密码:</span><input type="password" name="passwd" value="123123"/>
+			<li><span>密码:</span><input type="password" name="passwd" value=""/>
+				<div class="tips"></div>	
+			</li>
+			<li id="validCode" style="{if $timesLogin < 3}display:none;{/if}"><span>验证码:</span><input type="text" name="vcode" value="" style="width:40px;" maxlength='4'/>&nbsp;<img src="" id="vcodeImg" style="vertical-align:middle;height:30px;cursor:pointer;" onclick="updateCodeImg()"/><a href="javascript:;" onclick="updateCodeImg()">看不清楚</a>
 				<div class="tips"></div>	
 			</li>
 			<li>
@@ -39,7 +42,11 @@ ul,ol{list-style-type:none;}
 </html>
 <script type="text/javascript" src="public/js/jquery-1.8.0.js"></script>
 <script type="text/javascript">
+function updateCodeImg(){
+		$('#vcodeImg').attr('src', '?r=__captcha&rand=' + Math.random());
+}
 $(function(){
+		$('#vcodeImg').attr('src', '?r=__captcha');
 		$('input[type!=submit]').focus(function(){
 			$('.tips').hide();
 			});
@@ -56,16 +63,33 @@ $(function(){
 			$('input[name="passwd"]').next().html('密码不能为空').show();
 			return false;
 		}
+		var vcode = $('input[name="vcode"]').val();
 		$.ajax({
 			type:"POST",
-			data:"u=" + username + "&p=" + password,
+			data:"u=" + username + "&p=" + password + "&vcode=" + vcode,
 			url:"?r=__login",
 			success:function(msg){
-						if(msg == 'successful'){
-							window.location.href = '?r=_admin_page';
-						}else{
-							$('#btn').next().html('帐号输入有误').show();
+						var info = '';
+						switch(msg){
+							case '1':
+								window.location.href = '?r=_admin_page';
+								break;
+							case '2':
+								info = '帐号输入有误';
+								break;
+							case '3':
+								info = '帐号输入有误,请您输入验证码！';
+								$('#validCode').show();
+								break;
+							case '6':
+								info = '您的IP已被我们封锁，24小时之后你方可再进行登陆验证！';
+								break;
+							case '7':
+								info = '请核对您的验证码!';
+								break;
 						}
+
+						$('#btn').next().html(info).show();
 					}
 		});
 	});

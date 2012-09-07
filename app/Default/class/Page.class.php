@@ -5,28 +5,70 @@ class Default_Page extends Controller{
 
 	public function index(){
 	}
-	public function test(){
-		$this->display('test.tpl');
-	}
 
+	/**
+	 * 1:用户验证成功;2:用户验证失败;3:是第3次验证;6:封锁IP;7:验证码不正确;
+	 */
 	public function login(){
+		$ip = ip2long(getClientIP());
+		$user = Default_Model_User::getInstance();
+		$timesLogin = $user->getLoginTimes($ip);
 		if(!empty($_POST)){
 			$username = $_POST['u'];
 			$password = md5($_POST['p']);
 
-			if(!$user = (new Default_Model_User())->login($username, $password)){
-				echo 'failure';
+			if($valid = $user->validClientIp($ip)){
+				$userInfo = $user->login($username, $password);
+				if($userInfo){
+					$user->clearClientIp($ip);
+					if($timesLogin == 4){
+						empty($_POST['vcode']) && exit('7');
+						if($_POST['vcode'] == $_SESSION['vcode']){
+							$_SESSION['userId'] = $userInfo->id;
+						}else{
+							echo '7';
+							return;
+						}
+					}else{
+						$_SESSION['userId'] = $userInfo->id;
+					}
+					echo '1';
+					return;
+				}else{
+					if($timesLogin === 3){
+						echo '3';
+						return;
+					}else if($timesLogin >= 6){
+						echo '6';
+						return;
+					}
+					echo '2';
+					return;
+				}
 			}else{
-				$_SESSION['userId'] = $user->id;
-				echo 'successful';
+				echo '6';
 			}
+			return '';
 		}else{
-			$this->display('login.tpl');
+			$params['timesLogin'] = $timesLogin;
+			$this->display('login.tpl', $params);
 		}
 	}
 
 	public function logout(){
-		(new Default_Model_User())->logout();
+		Default_Model_User::getInstance()->logout();
 		header('Location:index.php?r=__login');
+	}
+
+	public function captcha(){
+		//phpinfo();exit();
+		require FRAME_ROOT_DIR.'/lib/Captcha/captcha.php';
+		$captcha = new SimpleCaptcha();
+		$captcha->width = 130;
+		$captcha->height = 50;
+		$captcha->session_var = 'vcode';
+		$captcha->minWordLength = 4;
+		$captcha->maxWordLength = 5;
+		$captcha->CreateImage();
 	}
 }

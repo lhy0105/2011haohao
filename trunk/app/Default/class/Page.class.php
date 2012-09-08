@@ -15,46 +15,34 @@ class Default_Page extends Controller{
 		$valid = $user->validClientIp($ip);
 		$timesLogin = $user->getLoginTimes($ip);
 		$params['isValid'] = $valid;
-		if(!empty($_POST)){
-			$username = $_POST['u'];
-			$password = md5($_POST['p']);
 
-			if($valid){
-				$userInfo = $user->login($username, $password);
-				if($userInfo){
-					$user->clearClientIp($ip);
-					if($timesLogin >= 4){
-						empty($_POST['vcode']) && exit('7');
-						if($_POST['vcode'] == $_SESSION['vcode']){
-							$_SESSION['userId'] = $userInfo->id;
-						}else{
-							echo '7';
-							return;
-						}
-					}else{
-						$_SESSION['userId'] = $userInfo->id;
-					}
-					echo '1';
-					return;
-				}else{
-					if($timesLogin === 4){
-						echo '3';
-						return;
-					}else if($timesLogin >= 6){
-						echo '6';
-						return;
-					}
-					echo '2';
-					return;
-				}
-			}else{
-				echo '6';
-			}
-			return '';
-		}else{
+		if(empty($_POST)){/* Open The Page At First !*/
 			$params['timesLogin'] = $timesLogin;
 			$this->display('login.tpl', $params);
+			return;
 		}
+
+
+		!$valid && exit('6');/*No validate IP!*/
+
+		if($timesLogin > 3){/* Validate The verifyed code!*/
+			empty($_POST['vcode']) && exit('7');
+			$_POST['vcode'] !== $_SESSION['vcode'] && exit('7');
+		}
+
+
+		/* Validate The User Information! */
+		(empty($_POST['u']) || empty($_POST['p'])) && exit('2');
+		$username = $_POST['u'];
+		$password = md5($_POST['p']);
+		$userInfo = $user->login($username, $password);
+		if(!$userInfo){
+			exit('2');
+		}
+
+		$user->clearClientIp($ip);
+		$_SESSION['userId'] = $userInfo->id;
+		exit('1');
 	}
 
 	public function logout(){

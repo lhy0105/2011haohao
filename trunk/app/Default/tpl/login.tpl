@@ -18,7 +18,7 @@ ul,ol{list-style-type:none;}
 {/literal}
 </head>
 <body>
-{if $isValid}
+{if !$isValid}
 您的IP已被认为是不安全的！如果您要登录，需要跟管理员联系baochuanzhou@gmail.com！
 {else}
 <div class="s_body">
@@ -31,7 +31,7 @@ ul,ol{list-style-type:none;}
 			<li><span>密码:</span><input type="password" name="passwd" value=""/>
 				<div class="tips"></div>	
 			</li>
-			<li id="validCode" style="{if $timesLogin < 3}display:none;{/if}"><span>验证码:</span><input type="text" name="vcode" value="" style="width:40px;" maxlength='4'/>&nbsp;<img src="" id="vcodeImg" style="vertical-align:middle;height:30px;cursor:pointer;" onclick="updateCodeImg()"/><a href="javascript:;" onclick="updateCodeImg()">看不清楚</a>
+			<li id="validCode" style="{if $timesLogin < 3}display:none;{/if}"><span>验证码:</span><input type="text" name="vcode" value="" style="width:40px;" maxlength='5'/>&nbsp;<img src="" id="vcodeImg" style="vertical-align:middle;height:30px;cursor:pointer;" onclick="updateCodeImg()"/><a href="javascript:;" onclick="updateCodeImg()">看不清楚</a>
 				<div class="tips"></div>	
 			</li>
 			<li>
@@ -85,9 +85,11 @@ $(function(){
 								$('#validCode').show();
 								break;
 							case '6':
+								$('#validCode').show();
 								info = '您的IP已被我们封锁，24小时之后你方可再进行登陆验证！';
 								break;
 							case '7':
+								$('#validCode').show();
 								info = '请核对您的验证码!';
 								break;
 						}

@@ -12,12 +12,14 @@ class Default_Page extends Controller{
 	public function login(){
 		$ip = ip2long(getClientIP());
 		$user = Default_Model_User::getInstance();
+		$valid = $user->validClientIp($ip);
 		$timesLogin = $user->getLoginTimes($ip);
+		$params['isValid'] = $valid;
 		if(!empty($_POST)){
 			$username = $_POST['u'];
 			$password = md5($_POST['p']);
 
-			if($valid = $user->validClientIp($ip)){
+			if($valid){
 				$userInfo = $user->login($username, $password);
 				if($userInfo){
 					$user->clearClientIp($ip);

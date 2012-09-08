@@ -22,9 +22,13 @@ class Default_Model_User extends Db{
 	 * 1:合法;0:不合法;6:封杀IP
 	 */
 	public function validClientIp($clientIp){
-		$sql = 'select * from '.DB_PRE.'ip where '.DB_PRE.'ip = :ip';
+		$sql = 'select * from '.DB_PRE.'ip where ip = :ip';
 
 		$row = $this->getSingle($sql, array(':ip' => $clientIp), PDO::FETCH_OBJ);
+
+		if(!empty($row) && strtotime($row->create_date) + 24 * 3600 <= strtotime('now')){
+			return true;
+		}
 
 		if($row && $row->times >= 6)
 			return false;

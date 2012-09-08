@@ -47,6 +47,63 @@ INSERT INTO `book` VALUES (3,'C语言书籍','2012-09-03 16:00:00','2012-10-30 1
 UNLOCK TABLES;
 
 --
+-- Table structure for table `hh_ip`
+--
+
+DROP TABLE IF EXISTS `hh_ip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hh_ip` (
+  `id` int(22) NOT NULL AUTO_INCREMENT,
+  `ip` int(12) DEFAULT '0',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `times` int(5) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `ip_index` (`ip`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hh_ip`
+--
+
+LOCK TABLES `hh_ip` WRITE;
+/*!40000 ALTER TABLE `hh_ip` DISABLE KEYS */;
+INSERT INTO `hh_ip` VALUES (17,2130706433,'2012-09-07 09:59:27',5);
+/*!40000 ALTER TABLE `hh_ip` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hh_user`
+--
+
+DROP TABLE IF EXISTS `hh_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hh_user` (
+  `id` int(22) NOT NULL AUTO_INCREMENT,
+  `name` char(100) NOT NULL,
+  `password` char(100) NOT NULL,
+  `last_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_ip` int(10) DEFAULT '0',
+  `age` int(22) DEFAULT '0',
+  `career` varchar(22) DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `name_password` (`name`,`password`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hh_user`
+--
+
+LOCK TABLES `hh_user` WRITE;
+/*!40000 ALTER TABLE `hh_user` DISABLE KEYS */;
+INSERT INTO `hh_user` VALUES (2,'test','4297f44b13955235245b2497399d7a93','2012-09-06 12:29:36',0,0,'');
+/*!40000 ALTER TABLE `hh_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `log`
 --
 
@@ -128,36 +185,6 @@ LOCK TABLES `pay_type` WRITE;
 INSERT INTO `pay_type` VALUES (1,'支出',0),(2,'房租',1),(3,'水费',1),(4,'电费',1),(5,'宽带费',1),(6,'超市',1),(7,'买菜',1),(8,'零食',1),(9,'书籍',1),(10,'网购',1),(11,'回家',1),(12,'外面吃饭',1),(13,'衣服',1),(14,'零花钱',1),(15,'交通费',1),(16,'收入',0),(17,'投资',0),(18,'债务',0),(19,'工资',16),(20,'投资现金',17),(21,'欠款',18),(22,'借款',18),(23,'买药',1),(24,'礼金',16);
 /*!40000 ALTER TABLE `pay_type` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `id` int(22) NOT NULL AUTO_INCREMENT,
-  `name` char(100) NOT NULL,
-  `password` char(100) NOT NULL,
-  `last_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `last_ip` char(20) DEFAULT '',
-  `age` int(22) DEFAULT '0',
-  `career` varchar(22) DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `name_password` (`name`,`password`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'test','4297f44b13955235245b2497399d7a93','2012-09-06 06:07:12','127.0.0.1',0,'');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -168,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-09-06 14:41:06
+-- Dump completed on 2012-09-08 16:13:35

@@ -7,7 +7,7 @@ class Default_Page extends Controller{
 	}
 
 	/**
-	 * 1:用户验证成功;2:用户验证失败;3:是第3次验证;6:封锁IP;7:验证码不正确;
+	 * 1:用户验证成功;2:用户验证失败;3:是第4次验证(这时候验证码验证);6:封锁IP;7:验证码不正确;
 	 */
 	public function login(){
 		$ip = ip2long(getClientIP());
@@ -21,7 +21,7 @@ class Default_Page extends Controller{
 				$userInfo = $user->login($username, $password);
 				if($userInfo){
 					$user->clearClientIp($ip);
-					if($timesLogin == 4){
+					if($timesLogin >= 4){
 						empty($_POST['vcode']) && exit('7');
 						if($_POST['vcode'] == $_SESSION['vcode']){
 							$_SESSION['userId'] = $userInfo->id;
@@ -35,7 +35,7 @@ class Default_Page extends Controller{
 					echo '1';
 					return;
 				}else{
-					if($timesLogin === 3){
+					if($timesLogin === 4){
 						echo '3';
 						return;
 					}else if($timesLogin >= 6){

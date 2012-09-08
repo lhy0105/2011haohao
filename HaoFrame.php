@@ -107,9 +107,9 @@ EOD;
 	 */
 	public function run()
 	{
-		$_GET['module'] = $this->params['module'];
-		$_GET['controller'] = $this->params['controller'];
-		$_GET['action'] = $this->params['action'];
+		!isset($_GET['module']) && $_GET['module'] = $this->params['module'];
+		!isset($_GET['controller']) && $_GET['controller'] = $this->params['controller'];
+		!isset($_GET['action']) && $_GET['action'] = $this->params['action'];
 
 		if(count($_GET) && isset($_GET['r'])){
 			$_params = explode('_',$_GET['r']);

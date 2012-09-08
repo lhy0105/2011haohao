@@ -18,6 +18,9 @@ ul,ol{list-style-type:none;}
 {/literal}
 </head>
 <body>
+{if $timesLogin >= 6}
+您的IP已被认为是不安全的！如果您要登录，需要跟管理员联系baochuanzhou@gmail.com！
+{else}
 <div class="s_body">
 	<div class="login">
 		<h1>登陆</h1>
@@ -95,4 +98,4 @@ $(function(){
 	});
 });
 </script>
-
+{/if}

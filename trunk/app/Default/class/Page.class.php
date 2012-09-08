@@ -51,7 +51,6 @@ class Default_Page extends Controller{
 			return '';
 		}else{
 			$params['timesLogin'] = $timesLogin;
-			if($timesLogin >= 6) exit('您的IP已被认为是不安全的！如果您要登录，需要跟管理员联系baochuanzhou@gmail.com！');
 			$this->display('login.tpl', $params);
 		}
 	}

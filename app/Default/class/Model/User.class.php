@@ -21,7 +21,7 @@ class Default_Model_User extends Db{
 	/**
 	 * 1:合法;0:不合法;6:封杀IP
 	 */
-	public function validClientIp($clientIp){
+	public function validClientIP($clientIp){
 		$sql = 'select * from '.DB_PRE.'ip where ip = :ip';
 
 		$row = $this->getSingle($sql, array(':ip' => $clientIp), PDO::FETCH_OBJ);
@@ -36,7 +36,7 @@ class Default_Model_User extends Db{
 		return true;
 	}
 
-	public function clearClientIp($clientIp){
+	public function clearClientIP($clientIp){
 		$sql = 'delete from '.DB_PRE.'ip where ip = :clientIp';
 
 		$stmt = $this->getDbh()->prepare($sql);

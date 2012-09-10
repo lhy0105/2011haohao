@@ -7,7 +7,7 @@ class Default_Page extends Controller{
 		$ip = ip2long(get_client_ip());
 		$user = Default_Model_User::getInstance();
 		$valid = $user->validClientIP($ip);
-		$times_login =  $user->getLoginTimes($ip);
+		$times_login =  $user->getTimesLogin($ip);
 		$params['isValid'] = $valid;
 
 		if(empty($_POST)){/* Open The Page At First !*/
@@ -29,12 +29,11 @@ class Default_Page extends Controller{
 		(empty($_POST['u']) || empty($_POST['p'])) && exit('2');
 		$username = $_POST['u'];
 		$password = md5($_POST['p']);
-		$user_info = $user->login($username, $password);
+		$user_info = $user->login($username, $password, $ip);
 		if(!$user_info){
 			exit('2');
 		}
 
-		$user->clearClientIP($ip);
 		$_SESSION['userId'] = $user_info->id;
 		exit('1');
 	}

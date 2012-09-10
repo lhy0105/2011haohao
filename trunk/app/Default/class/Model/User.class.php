@@ -36,7 +36,7 @@ class Default_Model_User extends Db{
 		return true;
 	}
 
-	public function clearClientIP($clientIp){
+	private function _clearClientIP($clientIp){
 		$sql = 'delete from '.DB_PRE.'ip where ip = :clientIp';
 
 		$stmt = $this->getDbh()->prepare($sql);
@@ -44,20 +44,26 @@ class Default_Model_User extends Db{
 		$stmt->execute();
 	}
 
-	public function getLoginTimes($clientIp){
+	public function getTimesLogin($clientIp){
+		$sql = 'select * from '.DB_PRE.'ip where ip = :ip';
+		$row = $this->getSingle($sql, array(':ip' => $clientIp), PDO::FETCH_OBJ);
+
+		if(!$row) return 1;
+
+		return $row->times + 1;
+
+	}
+
+	private function _updateTimesLogin($clientIp){
 		$sql = 'select * from '.DB_PRE.'ip where ip = :ip';
 		$row = $this->getSingle($sql, array(':ip' => $clientIp), PDO::FETCH_OBJ);
 
 		$createDate = date('Y-m-d H:i:s');
 		if(!$row){
 			$this->_insertIP($clientIp, $createDate);
-			return 1;
 		}else{
 			$this->_updateIP($clientIp, $row->times +1, $createDate);
 		}
-
-		return $row->times + 1;
-
 	}
 
 
@@ -79,13 +85,20 @@ class Default_Model_User extends Db{
 		$stmt->execute();
 	}
 
-	public function login($username, $password){
+	public function login($username, $password, $ip){
 		$sql = 'select * from '.DB_PRE.'user where name = ? and password = ?';
 		$stmt = $this->getDbh()->prepare($sql);
 		$stmt->bindParam(1, $username, PDO::PARAM_STR, 20);
 		$stmt->bindParam(2, $password, PDO::PARAM_STR, 50);
 		$stmt->execute();
-		return $stmt->fetch(PDO::FETCH_OBJ);
+
+		$row  = $stmt->fetch(PDO::FETCH_OBJ);
+		if(!$row){
+			$this->_updateTimesLogin($ip);
+		}else{
+			$this->_clearClientIP($ip);
+		}
+		return $row;
 	}
 
 	public function logout(){

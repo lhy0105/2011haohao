@@ -27,6 +27,8 @@ class Default_Admin extends Controller{
 		$old_password = $_POST['oldpasswd'];
 		$new_password = $_POST['newpasswd'];
 
+		(strlen($old_password) < 5 || strlen($new_password) < 5)  && exit(0);
+
 		if($old_password == $new_password){
 			exit('3');
 		}

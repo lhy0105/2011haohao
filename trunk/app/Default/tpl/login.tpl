@@ -54,51 +54,57 @@ $(function(){
 			$('.tips').hide();
 			});
 		$('#btn').click(function(){
-		$('.tips').hide();
-
-		var username = $('input[name="username"]').val();
-		if(username == ''){
-			$('input[name="username"]').next().html('用户名不能为空').show();
-			return false;
-		}
-		var password = $('input[name="passwd"]').val();
-		if(password == ''){
-			$('input[name="passwd"]').next().html('密码不能为空').show();
-			return false;
-		}
-		var vcode = $('input[name="vcode"]').val();
-		$.ajax({
-			type:"POST",
-			data:"u=" + username + "&p=" + password + "&vcode=" + vcode,
-			url:"?r=__login",
-			success:function(msg){
-						var info = '';
-						switch(msg){
-							case '1':
-								window.location.href = '?r=_admin_page';
-								break;
-							case '2':
-								info = '帐号输入有误';
-								break;
-							case '3':
-								info = '帐号输入有误,请您输入验证码！';
-								$('#validCode').show();
-								break;
-							case '6':
-								$('#validCode').show();
-								info = '您的IP已被我们封锁，24小时之后你方可再进行登陆验证！';
-								break;
-							case '7':
-								$('#validCode').show();
-								info = '请核对您的验证码!';
-								break;
-						}
-
-						if(info != '')
-							$('#btn').next().html(info).show();
-					}
+			checklogin();
 		});
-	});
+		$(document).keydown(function(event){
+			if(event.keyCode == 13){
+				checklogin();
+			}
+		});
 });
+var checklogin = function(){
+	$('.tips').hide();
+	var username = $('input[name="username"]').val();
+	if(username == ''){
+		$('input[name="username"]').next().html('用户名不能为空').show();
+		return false;
+	}
+	var password = $('input[name="passwd"]').val();
+	if(password == ''){
+		$('input[name="passwd"]').next().html('密码不能为空').show();
+		return false;
+	}
+	var vcode = $('input[name="vcode"]').val();
+	$.ajax({
+		type:"POST",
+		data:"u=" + username + "&p=" + password + "&vcode=" + vcode,
+		url:"?r=__login",
+		success:function(msg){
+					var info = '';
+					switch(msg){
+						case '1':
+							window.location.href = '?r=_admin_page';
+							break;
+						case '2':
+							info = '帐号输入有误';
+							break;
+						case '3':
+							info = '帐号输入有误,请您输入验证码！';
+							$('#validCode').show();
+							break;
+						case '6':
+							$('#validCode').show();
+							info = '您的IP已被我们封锁，24小时之后你方可再进行登陆验证！';
+							break;
+						case '7':
+							$('#validCode').show();
+							info = '请核对您的验证码!';
+							break;
+					}
+
+					$('#btn').next().html(info).show();
+				}
+	});
+}
 </script>
 {/if}

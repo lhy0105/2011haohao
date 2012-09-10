@@ -59,8 +59,9 @@ CREATE TABLE `hh_ip` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `times` int(5) DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `ip_index` (`ip`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  KEY `ip_index` (`ip`),
+  KEY `create_date` (`create_date`)
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,8 +89,9 @@ CREATE TABLE `hh_user` (
   `age` int(22) DEFAULT '0',
   `career` varchar(22) DEFAULT '',
   PRIMARY KEY (`id`),
-  KEY `name_password` (`name`,`password`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  KEY `name_password` (`name`,`password`),
+  KEY `id_password` (`id`,`password`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +100,7 @@ CREATE TABLE `hh_user` (
 
 LOCK TABLES `hh_user` WRITE;
 /*!40000 ALTER TABLE `hh_user` DISABLE KEYS */;
-INSERT INTO `hh_user` VALUES (2,'test','4297f44b13955235245b2497399d7a93','2012-09-06 12:29:36',0,0,'');
+INSERT INTO `hh_user` VALUES (2,'test','4297f44b13955235245b2497399d7a93','2012-09-10 07:00:15',1270,0,''),(4,'zhoubc','4297f44b13955235245b2497399d7a93','0000-00-00 00:00:00',0,0,'');
 /*!40000 ALTER TABLE `hh_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +148,7 @@ CREATE TABLE `pay` (
   KEY `amount` (`ammount`),
   KEY `pay_date` (`pay_date`),
   KEY `sid` (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +157,7 @@ CREATE TABLE `pay` (
 
 LOCK TABLES `pay` WRITE;
 /*!40000 ALTER TABLE `pay` DISABLE KEYS */;
-INSERT INTO `pay` VALUES (41,450.00,'2012-09-03 11:24:06',21,'李艳梅，替公司缴纳网费450元，今通过中国银行网上银行交付。'),(50,11.50,'2012-09-02 16:00:00',7,'一捆葱2.0\n6个西红柿6.5\n1个菜花3.0\n'),(51,1.00,'2012-09-03 16:00:00',12,'普天早上吃饭:1个烧饼，1碗豆腐脑。'),(52,27.40,'2012-09-04 16:00:00',23,'结膜炎，眼药水两瓶。'),(53,2.50,'2012-09-04 16:00:00',12,'早餐，路摊吃饭。——粥!'),(55,3.00,'2012-09-05 16:00:00',21,'早餐没带钱包，欠芦苇经3.0元。');
+INSERT INTO `pay` VALUES (41,450.00,'2012-09-03 11:24:06',21,'李艳梅，替公司缴纳网费450元，今通过中国银行网上银行交付。'),(50,11.50,'2012-09-02 16:00:00',7,'一捆葱2.0\n6个西红柿6.5\n1个菜花3.0\n'),(51,1.00,'2012-09-03 16:00:00',12,'普天早上吃饭:1个烧饼，1碗豆腐脑。'),(52,27.40,'2012-09-04 16:00:00',23,'结膜炎，眼药水两瓶。'),(53,2.50,'2012-09-04 16:00:00',12,'早餐，路摊吃饭。——粥!'),(55,3.00,'2012-09-05 16:00:00',21,'早餐没带钱包，欠芦苇经3.0元。'),(56,30.00,'2012-09-07 16:00:00',7,'买菜，一天的菜！'),(57,100.00,'2012-09-08 16:00:00',15,'充值卡充值，老婆和我的。');
 /*!40000 ALTER TABLE `pay` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,4 +196,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-09-08 16:52:55
+-- Dump completed on 2012-09-10 15:29:03

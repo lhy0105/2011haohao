@@ -113,7 +113,7 @@ class Default_Model_User extends Db{
 		if(!self::authorize()) return false;
 		$sql = 'UPDATE '.DB_PRE.'user SET last_date =:last_date,last_ip=:last_ip WHERE id =:user_id';
 		$stmt = $this->getDbh()->prepare($sql);
-		$stmt->execute(array(':last_date' => date('Y-m-d H:i:s'), ':last_ip' => get_client_ip(), ':user_id' => $_SESSION['userId']));
+		$stmt->execute(array(':last_date' => date('Y-m-d H:i:s'), ':last_ip' => Utility_Client::getClientIP(), ':user_id' => $_SESSION['userId']));
 		session_destroy();
 	}
 

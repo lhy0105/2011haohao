@@ -8,7 +8,7 @@ class Default_Admin extends Controller{
 	public function page(){
 		$params = array();
 		$params['clientIP'] = get_client_ip();
-		$params['user'] = (new Default_Model_User())->getUserById();
+		$params['user'] = Default_Model_User::getInstance()->getUserById();
 		$this->display('page.tpl', $params);
 	}
 

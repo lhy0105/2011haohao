@@ -4,7 +4,7 @@ class Default_Page extends Controller{
 	 * 1:Success;2:Failure;3:Forth validation(Show verified Code);6:No IP;7:The verified Code  Is Error!;
 	 */
 	public function login(){
-		$ip = ip2long(get_client_ip());
+		$ip = ip2long(Utility_Client::getClientIP());
 		$user = Default_Model_User::getInstance();
 		$valid = $user->validClientIP($ip);
 		$times_login =  $user->getTimesLogin($ip);
@@ -44,7 +44,6 @@ class Default_Page extends Controller{
 	}
 
 	public function captcha(){
-		//phpinfo();exit();
 		require FRAME_ROOT_DIR.'/lib/Captcha/captcha.php';
 		$captcha = new SimpleCaptcha();
 		$captcha->width = 130;

@@ -101,19 +101,40 @@ class Default_Model_User extends Db{
 		return $row;
 	}
 
+	public function updatePassword($password, $userId){
+		$sql = 'update '.DB_PRE.'user set password=:password where id=:uid';
+		$stmt = $this->getDbh()->prepare($sql);
+		$stmt->bindParam(':password', $password, PDO::PARAM_STR, 20);
+		$stmt->bindParam(':uid', $userId, PDO::PARAM_STR, 50);
+		$stmt->execute();
+	}
+
+	public function validPassword($password, $userId){
+		$sql = 'select * from '.DB_PRE.'user where id = :uid and password = :password';
+		$stmt = $this->getDbh()->prepare($sql);
+		$stmt->bindParam(':password', $password, PDO::PARAM_STR, 20);
+		$stmt->bindParam(':uid', $userId, PDO::PARAM_INT);
+		$stmt->execute();
+
+		if($stmt->fetch(PDO::FETCH_OBJ)){
+			return true;
+		}
+		return false;
+	}
+
 	public function logout(){
 		if(!self::authorize()) return false;
-		$sql = "UPDATE {DB_PRE}user SET last_date =:last_date,last_ip=:last_ip WHERE id =:user_id";
+		$sql = 'UPDATE '.DB_PRE.'user SET last_date =:last_date,last_ip=:last_ip WHERE id =:user_id';
 		$stmt = $this->getDbh()->prepare($sql);
 		$stmt->execute(array(':last_date' => date('Y-m-d H:i:s'), ':last_ip' => get_client_ip(), ':user_id' => $_SESSION['userId']));
 		session_destroy();
 	}
 
+
 	public static function authorize(){
-		if(isset($_SESSION['userId'])) 
-			return true;
-		return false;
+		return isset($_SESSION['userId'])?true:false;
 	}
+
 
 	public function getUserById(){
 		if(!self::authorize()) return false;

@@ -39,7 +39,7 @@
 						</ul>
 					</div>
 					<div class="notice">
-						提示:为了帐号的安全,如果上面的登陆情况不正常,建议马上<a href="">修改密码</a>。
+						提示:为了帐号的安全,如果上面的登陆情况不正常,建议马上<a href="javascript:;" data="_admin_changePasswd" onclick="password.changePassword(this)">修改密码</a>。
 					</div>
 				</div>
 			</div>

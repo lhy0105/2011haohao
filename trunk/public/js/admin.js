@@ -146,3 +146,62 @@ function selectAll(name, id){
 		}
 	});
 }
+
+var password = {
+	changePassword:function (o){
+		var url = '?r=' + o.getAttribute('data');
+		popwin.setTitle(o.innerHTML)
+			.showTitle()
+			.setContent('iframe', url)
+			.setPos('middle', 'center')
+			.setSize(400, 150)
+			.show();
+
+	},
+	changeForm:function(){
+		var oldpasswd = $('input[name="oldPasswd"]').val();
+		var newpasswd = $('input[name="newPasswd"]').val();
+		var illegal = false;
+
+		if(!/^.{5,}$/.test(oldpasswd)){
+			illegal = true;
+			$('#spanOldPasswd').html('原密码最少5位!');
+		}else{
+			$('#spanOldPasswd').html('')
+		}
+		if(!/^.{5,}$/.test(newpasswd)){
+			illegal = true;
+			$('#spanNewPasswd').html('新密码最少5位!');
+		}else{
+			$('#spanNewPasswd').html('');
+		}
+
+		if(oldpasswd == newpasswd){
+			illegal = true;
+			$('#btn').html('您未作任何改动！何必呢？');
+		}else{
+			$('#btn').html('');
+		}
+
+		if(illegal) return;
+
+		$.ajax({
+			type:'POST',
+			url:'?r=_admin_changePasswdForm',
+			data:'oldpasswd='+oldpasswd+'&newpasswd='+newpasswd,
+			success:function(msg){
+				if(msg == '0'){
+					$('#btn').html('非法参数！');
+					return;
+				}else if(msg == '2'){
+					$('#spanOldPasswd').html('旧密码验证错误！');
+					return;
+				}else if(msg == '3'){
+					$('#btn').html('您未作任何改动');
+					return;
+				}
+				parent.popwin.hide();
+			}
+		});
+	}
+}

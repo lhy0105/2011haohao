@@ -18,11 +18,6 @@
 				<ul>
 					<li class="current"><a href="##" data="_pay_" onclick="Menu.changeContent(this)">收支管理</a></li>
 					<li><a href="##" data="_book_" onclick="Menu.changeContent(this)">读书计划</a></li>
-					<!--<li><a href="##" data="_admin_role" onclick="Menu.changeContent(this)">角色管理</a></li>
-					<li><a href="##" data="_admin_organization" onclick="Menu.changeContent(this)">组织结构</a></li>
-					<li><a href="##" data="_admin_user" onclick="Menu.changeContent(this)">用户管理</a></li>
-					<li><a href="##" data="_admin_system" onclick="Menu.changeContent(this)">系统配置</a></li>
-					<li><a href="##" data="_admin_log" onclick="Menu.changeContent(this)">系统日志</a></li>-->
 				</ul>
 			</div>
 		</div>

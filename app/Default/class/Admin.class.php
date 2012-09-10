@@ -11,4 +11,34 @@ class Default_Admin extends Controller{
 		$params['user'] = (new Default_Model_User())->getUserById();
 		$this->display('page.tpl', $params);
 	}
+
+	public function changePasswd(){
+		$this->display('changePasswd.tpl');
+	}
+
+	/*
+	 * 0:代表非法参数;1:代码验证成功，并更新密码;2:代表旧密码输入有误;3:新、旧密码相同不做处理。
+	 */
+	public function changePasswdForm(){
+		$user = Default_Model_User::getInstance();
+
+		(empty($_POST['oldpasswd']) || empty($_POST['newpasswd'])) && exit('0');
+
+		$old_password = $_POST['oldpasswd'];
+		$new_password = $_POST['newpasswd'];
+
+		if($old_password == $new_password){
+			exit('3');
+		}
+
+		$userInfo = $user->getUserById();
+		$user_id = $userInfo->id;
+		if(!$user->validPassword(md5($old_password), $user_id)){
+			exit('2');
+		}
+
+
+		$user->updatePassword(md5($new_password), $user_id);
+		exit('1');
+	}
 }

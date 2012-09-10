@@ -27,7 +27,6 @@ default:
 
 session_start();
 
-include FRAME_ROOT_DIR.'/lib/Core/global.func.php';
 
 final class HaoFrame{
 	const VERSION = 'frame-1.0';

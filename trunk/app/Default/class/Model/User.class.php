@@ -109,19 +109,6 @@ class Default_Model_User extends Db{
 		$stmt->execute();
 	}
 
-	public function validPassword($password, $userId){
-		$sql = 'select * from '.DB_PRE.'user where id = :uid and password = :password';
-		$stmt = $this->getDbh()->prepare($sql);
-		$stmt->bindParam(':password', $password, PDO::PARAM_STR, 20);
-		$stmt->bindParam(':uid', $userId, PDO::PARAM_INT);
-		$stmt->execute();
-
-		if($stmt->fetch(PDO::FETCH_OBJ)){
-			return true;
-		}
-		return false;
-	}
-
 	public function logout(){
 		if(!self::authorize()) return false;
 		$sql = 'UPDATE '.DB_PRE.'user SET last_date =:last_date,last_ip=:last_ip WHERE id =:user_id';

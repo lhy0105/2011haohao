@@ -35,7 +35,7 @@ class Default_Admin extends Controller{
 
 		$userInfo = $user->getUserById();
 		$user_id = $userInfo->id;
-		if(!$user->validPassword(md5($old_password), $user_id)){
+		if($userInfo->password != md5($old_password)){
 			exit('2');
 		}
 

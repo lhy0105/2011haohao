@@ -89,8 +89,7 @@ CREATE TABLE `hh_user` (
   `age` int(22) DEFAULT '0',
   `career` varchar(22) DEFAULT '',
   PRIMARY KEY (`id`),
-  KEY `name_password` (`name`,`password`),
-  KEY `id_password` (`id`,`password`)
+  KEY `name_password` (`name`,`password`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -100,7 +99,7 @@ CREATE TABLE `hh_user` (
 
 LOCK TABLES `hh_user` WRITE;
 /*!40000 ALTER TABLE `hh_user` DISABLE KEYS */;
-INSERT INTO `hh_user` VALUES (2,'test','4297f44b13955235245b2497399d7a93','2012-09-10 07:00:15',1270,0,''),(4,'zhoubc','4297f44b13955235245b2497399d7a93','0000-00-00 00:00:00',0,0,'');
+INSERT INTO `hh_user` VALUES (2,'test','0b4e7a0e5fe84ad35fb5f95b9ceeac79','2012-09-10 07:32:35',1270,0,''),(4,'zhoubc','4297f44b13955235245b2497399d7a93','0000-00-00 00:00:00',0,0,'');
 /*!40000 ALTER TABLE `hh_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-09-10 15:29:03
+-- Dump completed on 2012-09-10 16:01:28

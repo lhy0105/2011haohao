@@ -89,11 +89,11 @@ textarea{background:url(master_admin.png) no-repeat 0 -135px;vertical-align:top;
 .head .name{float:left;width:300px;}
 
 .box li{float:left;font-size:14px;text-align:center;height:20px;line-height:20px;}
-.box .id{width:100px;}
+.box .id{width:40px;}
 .box .name{width:100px;}
 .box .ammount{width:100px;}
-.box .date{width:200px;}
-.box .pay_note{width:200px;overflow:hidden;}
+.box .date{width:120px;}
+.box .pay_note{width:430px;overflow:hidden;}
 .body li{border-bottom:1px solid #999;}
 .body .line li{background:#E5E5E5;}
 

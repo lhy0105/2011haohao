@@ -2,6 +2,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="个人管理系统 - 登录" />
+<meta name="description" content="收支管理,读书计划"/>
+<title>个人管理系统-登录</title>
 {literal}
 <style type="text/css">
 .s_body{margin:0 auto;width:900px;}

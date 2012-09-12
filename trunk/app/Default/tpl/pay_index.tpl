@@ -2,7 +2,7 @@
 <script type="text/javascript" src="public/amcharts/amcharts.js"></script>
 <script type="text/javascript" src="public/amcharts/amfallback.js"></script>
 <div class="pay_type">
-	<h1>收支种类</h1>
+	<h1><a href="##" data="_pay_" onclick="Menu.changeContent(this)">收支种类</a></h1>
 	{foreach name=type from=$types item=type}
 	<div class="head">
 		<h1>{$type->name}</h1>

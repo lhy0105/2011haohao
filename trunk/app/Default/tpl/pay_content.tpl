@@ -15,7 +15,7 @@
 	<ul class="box body{if $smarty.foreach.pay.iteration%2 == 0} line{/if}">
 		<li class="id"><input type="checkbox"  name="pay" value="{$pay->id}"></li>
 		<li class="ammount">{$pay->ammount}</li>
-		<li class="date">{$pay->pay_date}</li>
+		<li class="date">{$pay->pay_date|date_format:'Y-m-d'}</li>
 		<li class="pay_note">{$pay->note}</li>
 	</ul>
 	{/foreach}

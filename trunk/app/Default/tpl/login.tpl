@@ -105,7 +105,8 @@ var checklogin = function(){
 							break;
 					}
 
-					$('#btn').next().html(info).show();
+					if(info != '')
+						$('#btn').next().html(info).show();
 				}
 	});
 }

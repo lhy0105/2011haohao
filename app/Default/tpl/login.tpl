@@ -104,7 +104,7 @@ var checklogin = function(){
 							info = '请核对您的验证码!';
 							break;
 					}
-
+					updateCodeImg();
 					if(info != '')
 						$('#btn').next().html(info).show();
 				}

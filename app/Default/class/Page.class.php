@@ -22,6 +22,7 @@ class Default_Page extends Controller{
 		if($times_login> 3){/* Validate The verifyed code!*/
 			empty($_POST['vcode']) && exit('7');
 			$_POST['vcode'] !== $_SESSION['vcode'] && exit('7');
+			unset($_SESSION['vcode']);
 		}
 
 

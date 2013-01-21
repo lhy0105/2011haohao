@@ -217,6 +217,15 @@ Menu[ 'chess' ] = {
 			.setSize(600, 520)
 			.show();
 	},
+	pageSetCategory:function(){
+		var url = '';
+		popwin.setTitle('设置分类')
+			.showTitle()
+			.setContent('iframe', url)
+			.setPos('middle', 'center')
+			.setSize(600, 520)
+			.show();
+	},
 	pageCatCategory:function(o){
 		var url = '?r=' + o.getAttribute('data');
 		$.ajax({

@@ -46,6 +46,7 @@
 </div>
 <script type="text/javascript">
 qipu = "{$chess->content}";
+delete xx;
 xx = new xiangqi();
 xx.createMB();
 xx.initMB();

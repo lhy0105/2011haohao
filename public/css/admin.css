@@ -66,7 +66,7 @@ textarea{background:url(master_admin.png) no-repeat 0 -135px;vertical-align:top;
 .pay_type .head{margin-top:3px;}
 .pay_type .head h1{font-size:14px;font-weight:600;}
 .pay_type .current{border-bottom:1px dashed #FF9C08;}
-.pay_type li{text-indent:10px;height:20px;line-height:20px;}
+.pay_type li{text-indent:10px;line-height:20px;width:180px;}
 .pay_type .ico{;background:url(master_admin.png) no-repeat 0px 0px;display:block;float:left;width:10px;height:20px;margin-left:10px;}
 
 .pay_add{padding:10px;}

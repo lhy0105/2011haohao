@@ -194,6 +194,8 @@ final class View{
 			if(file_exists($fileSmarty)){
 				require_once $fileSmarty;
 				$smarty					=	new SmartyBC();
+				Smarty::$_MBSTRING = true;
+				Smarty::$_CHARSET = 'utf-8';
 				$smarty->compile_check	=	true;
 				$smarty->caching		=	0;
 				$smarty->compile_dir	=	FRAME_ROOT_DIR.'cache';

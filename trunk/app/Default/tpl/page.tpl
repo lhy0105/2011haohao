@@ -18,6 +18,7 @@
 				<ul>
 					<li class="current"><a href="##" data="_pay_" onclick="Menu.changeContent(this)">收支管理</a></li>
 					<li><a href="##" data="_book_" onclick="Menu.changeContent(this)">读书计划</a></li>
+					<li><a href="##" data="_chess_" onclick="Menu.changeContent(this)">学习象棋</a></li>
 				</ul>
 			</div>
 		</div>

@@ -137,6 +137,7 @@ var book = {
 	}
 }
 
+
 function selectAll(name, id){
 	$('input[name="' + name+ '"]').each(function(){
 		if($(this).attr('checked') == 'checked'){
@@ -201,6 +202,28 @@ var password = {
 					return;
 				}
 				parent.popwin.hide();
+			}
+		});
+	}
+}
+
+Menu[ 'chess' ] = {
+	pageAddCategory:function(){
+		var url = '?r=_chess_pageAddCategory';
+		popwin.setTitle('添加新分类')
+			.showTitle()
+			.setContent('iframe', url)
+			.setPos('middle', 'center')
+			.setSize(600, 520)
+			.show();
+	},
+	pageCatCategory:function(o){
+		var url = '?r=' + o.getAttribute('data');
+		$.ajax({
+			type:'GET',
+			url:url,
+			success:function(msg){
+				$('#chess_content').html(msg);
 			}
 		});
 	}

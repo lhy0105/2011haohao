@@ -693,12 +693,13 @@ function xiangqi(){
 	this.zouqi = function(o){
 		
 		if(this.user_nallow) return ;
-		var c = o.v.split('-');
+		var c = o.v.split('-'),
+			p = o.id.split('-');
 		if(this.crrentPlay != c[0]) return ;
 		
 		if(0 == this.oneHand){this.clearLuxian();}
 		this.currentQz = o;
-		this.zouqi_rule(o.v.split('-'), o.id.split('-'));
+		this.zouqi_rule(c, p);
 		this.oneHand = 0;
 	}
 	
@@ -856,7 +857,7 @@ function xiangqi(){
 			len = x - 0;
 			for(var i=0; i<len; i++){
 				x--;
-				temp = CHESS(x + '-' + y).v;
+				temp = $('#' + x + '-' + y).attr('v');
 				if('Z' != temp){
 					if(c != temp.split('-')[0]){ 
 						result.push([x, y]);
@@ -874,7 +875,7 @@ function xiangqi(){
 			len = 9 - x;
 			for(var i=0; i<len; i++){
 				x++;
-				temp = CHESS(x + '-' + y).v;
+				temp = $('#' + x + '-' + y).attr('v');
 				if('Z' != temp){
 					if(c != temp.split('-')[0]){ 
 						result.push([x, y]);
@@ -891,7 +892,7 @@ function xiangqi(){
 			len = y - 0;
 			for(var i=0; i<len; i++){
 				y--;
-				temp = CHESS(x + '-' + y).v;
+				temp = $('#' + x + '-' + y).attr('v');
 				if('Z' != temp){
 					if(c != temp.split('-')[0]){ 
 						result.push([x, y]);
@@ -908,7 +909,7 @@ function xiangqi(){
 			len = 8 - y;
 			for(var i=0; i<len; i++){
 				y++;
-				temp = CHESS(x + '-' + y).v;
+				temp = $('#' + x + '-' + y).attr('v');
 				if('Z' != temp){
 					if(c != temp.split('-')[0]){ 
 						result.push([x, y]);
@@ -933,7 +934,7 @@ function xiangqi(){
 			len = x - 0;
 			for(var i=0; i<len; i++){
 				x--;
-				temp = CHESS(x + '-' + y).v;
+				temp = $('#' + x + '-' + y).attr('v');
 				if('Z' != temp){
 					if(pao_allow){
 						if(c != temp.split('-')[0]){result.push([x, y]);break;}
@@ -951,7 +952,7 @@ function xiangqi(){
 			len = 9 - x;
 			for(var i=0; i<len; i++){
 				x++;
-				temp = CHESS(x + '-' + y).v;
+				temp = $('#' + x + '-' + y).attr('v');
 				if('Z' != temp){
 					if(pao_allow){
 						if(c != temp.split('-')[0]){result.push([x, y]);break;}
@@ -968,7 +969,7 @@ function xiangqi(){
 			len = y - 0;
 			for(var i=0; i<len; i++){
 				y--;
-				temp = CHESS(x + '-' + y).v;
+				temp = $('#' + x + '-' + y).attr('v');
 				if('Z' != temp){
 					if(pao_allow){
 						if(c != temp.split('-')[0]){result.push([x, y]);break;}
@@ -985,7 +986,7 @@ function xiangqi(){
 			len = 8 - y;
 			for(var i=0; i<len; i++){
 				y++;
-				temp = CHESS(x + '-' + y).v;
+				temp = $('#' + x + '-' + y).attr('v');
 				if('Z' != temp){
 					if(pao_allow){
 						if(c != temp.split('-')[0]){result.push([x, y]);break;}
@@ -1019,10 +1020,10 @@ function xiangqi(){
 
 			mx = parseInt(p[0]) + parseInt(ma_tui[i][0]);
 			my = parseInt(p[1]) + parseInt(ma_tui[i][1]);
-			temp = CHESS(mx + '-' + my).v;
+			temp = $('#' + mx + '-' + my).attr('v');
 			if('Z' != temp){continue;}
 
-			temp = CHESS(x + '-' + y).v;
+			temp = $('#' + x + '-' + y).attr('v');
 			if('Z' != temp){
 				if(c == temp.split('-')[0]){continue;}
 			}
@@ -1051,11 +1052,11 @@ function xiangqi(){
 			
 			mx = parseInt(p[0]) + parseInt(xiang_tui[i][0]);
 			my = parseInt(p[1]) + parseInt(xiang_tui[i][1]);
-			temp = CHESS(mx + '-' + my).v;
+			temp = $('#' + mx + '-' + my).attr('v');
 			if('Z' != temp){continue;}
 
 			
-			temp = CHESS(x + '-' + y).v;
+			temp = $('#' + x + '-' + y).attr('v');
 			if('Z' != temp){
 				if(c == temp.split('-')[0]){continue;}
 			}
@@ -1083,7 +1084,7 @@ function xiangqi(){
 			if('B' == c){if( (x < 0) || (x > 2) || (y <3) || (y > 5))continue;}
 
 			
-			temp = CHESS(x + '-' + y).v;
+			temp = $('#' + x + '-' + y).attr('v');
 			if('Z' != temp){if(c == temp.split('-')[0]){continue;}}
 
 			result.push([x, y]);
@@ -1110,7 +1111,7 @@ function xiangqi(){
 			if('B' == c){if( (x < 0) || (x > 2) || (y <3) || (y > 5))continue;}
 
 			
-			temp = CHESS(x + '-' + y).v;
+			temp = $('#' + x + '-' + y).attr('v');
 			if('Z' != temp){if(c == temp.split('-')[0]){continue;}}
 
 			result.push([x, y]);
@@ -1145,7 +1146,7 @@ function xiangqi(){
 				continue;
 			}
 
-			temp = CHESS(x + '-' + y).v;
+			temp = $('#' + x + '-' + y).attr('v');
 			if('Z' != temp){if(c == temp.split('-')[0]){continue;}}
 
 			result.push([x, y]);
@@ -1164,7 +1165,7 @@ function xiangqi(){
 		for(var i=0; i<this.x; i++){
 			if(i == src[0])continue;
 			if((i == desc[0]) && (src[1] == desc[1]))continue;
-			temp = CHESS(i + '-' + src[1]).v;
+			temp = $('#' + i + '-' + src[1]).attr('v');
 			if(base == temp){sflag = i; break;}
 		}
 		
@@ -1223,7 +1224,7 @@ function xiangqi(){
 		for(var i=0; i<this.x; i++){
 			if(i == src[0])continue;
 			if((i == desc[0]) && (src[1] == desc[1]))continue;
-			temp = CHESS(i + '-' + src[1]).v;
+			temp = $('#' + i + '-' + src[1]).attr('v');
 			if(base == temp){sflag = i; break;}
 		}
 		if('H' == c){
@@ -1405,7 +1406,7 @@ function xiangqi(){
 			//this.crrentPlay = this.userBlankAndRed(this.usergpos);
 			this.setUserBlankAndRed();
 			o.value = '结束';
-			CHESS('tishi').innerHTML = '当前模式：用户试下';
+			$('#tishi').html('当前模式：用户试下');
 		}else{
 			this.clearLuxian();
 			this.user_nallow = true;
@@ -1414,8 +1415,8 @@ function xiangqi(){
 			var _gpos_ = this.gpos;
 			this.first();
 			this.other(_gpos_);
-			CHESS('tishi').innerHTML = '当前模式：普通模式';
-			CHESS('user_qp_div').style.display = 'none';
+			$('#tishi').html('当前模式：普通模式');
+			//CHESS('user_qp_div').style.display = 'none';
 			this.setUserBlankAndRed3();
 		}
 	}

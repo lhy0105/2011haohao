@@ -1,5 +1,5 @@
 <div class="pay_type" style="width:120px;">
-	<h1><a href="##" data="_chess_" onclick="Menu.changeContent(this)">具体种类</a><a href="javascript:;" onclick="Menu.chess.pageAddCategory();"  title="添加新种类"><img src="public/css/add.png" alt="添加新种类" title="添加新种类"/></a></h1>
+	<h1><a href="##" data="_chess_" onclick="Menu.changeContent(this)">具体种类</a><a href="javascript:;" onclick="Menu.chess.pageAddCategory();"  title="添加新种类"><img src="public/css/add.png" alt="添加新种类" title="添加新种类"/></a><a href="javascript:;" onclick="Menu.chess.pageSetCategory()" alt="设置" title="设置"><img src="public/images/setting.png"/></a></h1>
 	<div class="head">
 {if !empty($categorys)}
 {foreach name=cate from=$categorys key=title item=types}
